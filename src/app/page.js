@@ -1,10 +1,10 @@
 import GuestNavbar from '@/components/navbar/guestNavbar'
-import { Button, Chip, Divider, Image } from '@nextui-org/react'
+import CharacteristicsSection from '@/components/sections/characteristicsSection'
+import HomeSection from '@/components/sections/homeSection'
+import { Chip, Divider } from '@nextui-org/react'
 import {
   FaArrowRightFromBracket,
   FaKitMedical,
-  FaUserDoctor,
-  FaBookMedical,
   FaBuffer,
   FaHeartCirclePlus,
   FaCheck,
@@ -14,94 +14,17 @@ import {
 } from 'react-icons/fa6'
 
 export default function Home () {
+  const homeButtonIcon = <FaArrowRightFromBracket />
+  const characteristicsSectionIcon = <FaBuffer size={50} className="text-success" />
+  const characteristicsChipIcon = <FaKitMedical size={20} className="text-success" />
+
   return (
     <main className="dark text-foreground bg-background flex flex-col items-center justify-center overflow-x-hidden">
+      { /* TODO: Arreglar el navbar y componentizar */}
       <GuestNavbar />
-      <section className="flex flex-col w-8/12 mt-16">
-        <h1 className="text-3xl text-success p-2 text-center">Mind Tracer</h1>
-
-        <div className="flex flex-col items-center justify-center text-center">
-          <Image
-            src="images/home_01.jpg"
-            alt="mind tracer"
-            width={300}
-            height={'auto'}
-          />
-        </div>
-        <div className="flex flex-col items-center justify-center text-center">
-          <p className="text-sm">
-            Mind tracer es una sistema web que hace uso de la inteligencia
-            artificial para ayudar a las instituciones educativas a identificar
-            patrones de depresion para que puedan ser tratados por el
-            profesional de la salud mental correspondiente, garantizando que el
-            tratamiento sea efectivo y a tiempo.
-          </p>
-        </div>
-        <div className="flex gap-4 items-center justify-center p-3">
-          <Button
-            as="a"
-            href="#"
-            startContent={<FaArrowRightFromBracket />}
-            color="success"
-            size="md"
-            className="hover:bg-green-300 transition-all duration-500"
-          >
-            Comenzar
-          </Button>
-        </div>
-      </section>
-      <section className="flex flex-col w-8/12 pt-16" id="caracteristicas">
-        <div className="flex flex-col items-center justify-center text-center">
-          <FaBuffer size={50} className="text-success" />
-          <h2 className="text-success text-xl p-3">Caracteristicas</h2>
-
-          <p className="text-sm">
-            Mind Tracer cuenta con características que te ayudan a identificar
-            patrones de enfermedades y a tomar decisiones más precisas en tus
-            enfermedades.
-          </p>
-
-          <div className="flex flex-col gap-4 md:flex-row flex-wrap items-center justify-center pb-4">
-            <div className="pt-4 md:pt-4">
-              <Chip
-                startContent={
-                  <FaKitMedical size={20} className="text-success" />
-                }
-                endContent={<FaKitMedical size={20} className="text-success" />}
-                className="w-max px-5"
-              >
-                Identificación de patrones
-              </Chip>
-            </div>
-
-            <div className="pt-0 md:pt-2">
-              <Chip
-                startContent={
-                  <FaUserDoctor size={20} className="text-success" />
-                }
-                endContent={<FaUserDoctor size={20} className="text-success" />}
-                className="w-max px-5"
-              >
-                Alertas a profesionales de salud
-              </Chip>
-            </div>
-            <div className="pt-0 md:pt-2">
-              <Chip
-                startContent={
-                  <FaBookMedical size={20} className="text-success" />
-                }
-                endContent={
-                  <FaBookMedical size={20} className="text-success" />
-                }
-                className="w-max px-5"
-              >
-                Informes detallados
-              </Chip>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <HomeSection btnIcon={ homeButtonIcon } />
+      <CharacteristicsSection sectionIcon={characteristicsSectionIcon} chipIcon={characteristicsChipIcon} />
+      { /* TODO: Arreglar los componentes de la sección de beneficios */ }
       <section className="flex flex-col w-8/12 pt-16" id="beneficios">
         <div
           className={'flex flex-col items-center justify-center text-center'}
