@@ -7,12 +7,9 @@ function PasswordInput () {
   const toggleVisibility = () => setIsVisible(!isVisible)
 
   return (
-    <div className="flex items-center w-full">
-        <FaLock
-          className="flex justify-center items-center h-full mx-2"
-          size={30}
-        />
+    <div className="flex items-center w-full justify-center">
         <Input
+          startContent= {<FaLock className="text-xl text-default-400 pointer-events-none" />}
           validationBehavior="native"
           required
           type={isVisible ? 'text' : 'password'}
