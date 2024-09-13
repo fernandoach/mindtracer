@@ -37,7 +37,6 @@ export default function Home () {
   const contactMailIcon = <FaHospitalUser size={20} className='text-success' />
   return (
     <main className='dark text-foreground bg-background flex flex-col items-center justify-center overflow-x-hidden'>
-      {/* TODO: Arreglar el navbar y componentizar */}
       <GuestNavbar />
       <HomeSection btnIcon={homeButtonIcon} />
       <CharacteristicsSection
