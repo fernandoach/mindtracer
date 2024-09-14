@@ -1,23 +1,24 @@
 import { Input } from '@nextui-org/react'
-import { FaAddressCard } from 'react-icons/fa6'
+import { FaGraduationCap } from 'react-icons/fa6'
 
-function EmailInput ({ handleChange, email, error }) {
+function GradeInput ({ handleChange, grade, error }) {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="flex items-center w-full">
         <Input
-          startContent={
-            <FaAddressCard className="text-xl text-default-400 pointer-events-none" />
-          }
+          startContent= {<FaGraduationCap className="text-xl text-default-400 pointer-events-none" />}
           validationBehavior="native"
           required
-          type="email"
-          name="email"
+          type="number"
+          name="grade"
+          min={1}
+          max={5}
+          step={1}
+          label="Grado"
           className="w-64 md:w-96"
           variant="bordered"
-          label="Correo electrónico"
-          placeholder="Ingrese su correo electrónico"
-          value={email}
+          placeholder="Ingrese su grado"
+          value={grade}
           onChange={handleChange}
         />
       </div>
@@ -26,4 +27,4 @@ function EmailInput ({ handleChange, email, error }) {
   )
 }
 
-export default EmailInput
+export default GradeInput

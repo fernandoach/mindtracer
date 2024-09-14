@@ -1,27 +1,30 @@
 'use client'
-import SendButton from '@/components/buttons/SendButton'
+import SendButton from '@/components/buttons/sendButton'
 import EmailInput from '@/components/inputs/emailInput'
 import PasswordInput from '@/components/inputs/passwordInput'
 import GuestNavbar from '@/components/navbar/guestNavbar'
-import { FaArrowRightToBracket } from 'react-icons/fa6'
+import LoginTitle from '@/components/titles/loginTitle'
+import { useState } from 'react'
 
 function Page () {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
+
   return (
     <main className='dark text-foreground bg-background flex flex-col items-center justify-center overflow-x-hidden h-screen'>
       <GuestNavbar />
       <section className='flex flex-col w-8/12'>
-      <div className="flex items-center justify-center w-full mb-4">
-          <h2 className="text-success text-center text-xl p-3 flex flex-col items-center justify-center">
-          <FaArrowRightToBracket
-            className="flex justify-center text-success items-center h-full mx-2"
-            size={30}
-          />
-          <span>Iniciar sesión  </span>
-          </h2>
-        </div>
+        <LoginTitle />
         <form className="flex flex-col items-center justify-center gap-4">
-          <EmailInput />
-          <PasswordInput />
+          <EmailInput handleChange={handleChange} email={formData.email} />
+          <PasswordInput handleChange={handleChange} password={formData.password} />
           <SendButton />
         </form>
       </section>

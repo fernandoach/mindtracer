@@ -1,9 +1,8 @@
-'use client'
-import { Input } from '@nextui-org/input'
+import { Input } from '@nextui-org/react'
 import { useState } from 'react'
 import { FaEye, FaEyeLowVision, FaLock } from 'react-icons/fa6'
 
-function PasswordInput ({ handleChange, password, error }) {
+function RepasswordInput ({ handleChange, repassword, error }) {
   const [isVisible, setIsVisible] = useState(false)
   const toggleVisibility = () => setIsVisible(!isVisible)
 
@@ -11,24 +10,19 @@ function PasswordInput ({ handleChange, password, error }) {
     <div className="flex flex-col items-center justify-center">
       <div className="flex items-center w-full">
         <Input
-          startContent={
-            <FaLock className="text-xl text-default-400 pointer-events-none" />
-          }
+          startContent={<FaLock className="text-xl text-default-400 pointer-events-none" />}
           validationBehavior="native"
           required
           type={isVisible ? 'text' : 'password'}
-          name="password"
+          name="rePassword"
           className="w-64 md:w-96"
           variant="bordered"
-          label="Contraseña"
-          placeholder="Ingrese su contraseña"
+          label="Re-contraseña"
+          placeholder="Repita su contraseña"
+          value={repassword}
+          onChange={handleChange}
           endContent={
-            <button
-              className="h-full focus:outline-none"
-              type="button"
-              onClick={toggleVisibility}
-              aria-label="toggle password visibility"
-            >
+            <button className="h-full focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
               {isVisible
                 ? (
                 <FaEyeLowVision className="text-2xl h-max text-default-400 pointer-events-none" />
@@ -38,8 +32,6 @@ function PasswordInput ({ handleChange, password, error }) {
                   )}
             </button>
           }
-          value={password}
-          onChange={handleChange}
         />
       </div>
       {error && <p className="text-red-500 text-center">{error}</p>}
@@ -47,4 +39,4 @@ function PasswordInput ({ handleChange, password, error }) {
   )
 }
 
-export default PasswordInput
+export default RepasswordInput
