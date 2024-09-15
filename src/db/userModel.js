@@ -12,10 +12,13 @@ const userSchema = new Schema({
   role: { type: String, default: 'user' },
   idb: [{ type: Number, default: [] }],
   tat: [{ type: String, default: [] }]
+},
+{
+  timestamps: true
 })
 
 userSchema.index({ email: 1 }, { unique: true })
 
-const userModel = mongoose.models.User || model('User', userSchema)
+const UserModel = mongoose.models.User || model('User', userSchema)
 
-export { userModel }
+export { UserModel }

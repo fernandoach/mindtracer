@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import { userModel } from './userModel'
+import { UserModel } from './userModel'
 
 dotenv.config()
 
@@ -11,44 +11,36 @@ let connection = false
 const initializeDb = async () => {
   try {
     if (!mongoose.modelNames().includes('User')) {
-      await userModel.init()
+      await UserModel.init()
+      await UserModel.createIndexes()
     }
   } catch (error) {
-    console.log(error)
+    throw new Error(error.message)
   }
 }
 
 const connectToDb = async () => {
   if (connection) {
-    console.log('Already connected to MongoDB')
-    return
+    throw new Error('Ya esta conectado a MongoDB.')
   }
-
   try {
     await initializeDb()
-    await mongoose.connect(MONGO_URI, {
-      useCreateIndex: true,
-      useFindAndModify: false
-    })
+    await mongoose.connect(MONGO_URI)
     connection = true
-    console.log('Connected to MongoDB')
   } catch (error) {
-    console.log(error)
+    throw new Error(error.message)
   }
 }
 
 const disconnectFromDb = async () => {
   if (!connection) {
-    console.log('Not connected to MongoDB')
-    return
+    throw new Error('No esta conectado a MongoDB.')
   }
-
   try {
     await mongoose.connection.close()
-    console.log('Disconnected from MongoDB')
     connection = false
   } catch (error) {
-    console.log(error)
+    throw new Error(error.message)
   }
 }
 
