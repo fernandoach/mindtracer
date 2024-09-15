@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import { userModel } from './userSchema'
+import { userModel } from './userModel'
 
 dotenv.config()
 

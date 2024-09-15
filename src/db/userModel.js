@@ -12,8 +12,6 @@ const userSchema = new Schema({
   role: { type: String, default: 'user' },
   idb: [{ type: Number, default: [] }],
   tat: [{ type: String, default: [] }]
-}, {
-  timestamps: true
 })
 
 userSchema.index({ email: 1 }, { unique: true })
