@@ -8,7 +8,7 @@ function RegisterTitle () {
         className="flex justify-center text-success items-center h-full mx-2"
         size={30}
       />
-      <span>Registrarse</span>
+      <span className='text-xl'>Regístrate</span>
       </h2>
     </div>
   )

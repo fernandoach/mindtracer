@@ -8,7 +8,7 @@ function LoginTitle () {
         className="flex justify-center text-success items-center h-full mx-2"
         size={30}
       />
-      <span>Iniciar sesión  </span>
+      <span className='text-xl'>Iniciar sesión  </span>
       </h2>
     </div>
   )
