@@ -10,7 +10,6 @@ function PasswordInput ({ handleChange, password }) {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <Input
-        suppressHydrationWarning= {true}
         startContent={
           <FaLock className="text-xl text-default-400 pointer-events-none" />
         }
