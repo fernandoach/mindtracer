@@ -1,10 +1,14 @@
 'use client'
+import { useAuth } from '@/components/auth/authContext'
 import SendButton from '@/components/buttons/sendButton'
+import ErrorChip from '@/components/chips/errorChip'
 import EmailInput from '@/components/inputs/emailInput'
 import PasswordInput from '@/components/inputs/passwordInput'
 import RegisterLink from '@/components/links/registerLink'
 import GuestNavbar from '@/components/navbar/guestNavbar'
 import LoginTitle from '@/components/titles/loginTitle'
+import { loginSchema } from '@/schemas/loginSchema'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 function Page () {
@@ -19,12 +23,27 @@ function Page () {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleSubmit = (e) => {
+  const [errors, setErrors] = useState(null)
+  const { handleLogin } = useAuth()
+  const router = useRouter()
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    const { email, password } = formData
-    console.log(email, password)
-    setIsSubmitting(false)
+    try {
+      setIsSubmitting(true)
+      const { email, password } = formData
+      await loginSchema.validateAsync({ email, password })
+      const userData = await handleLogin(email, password)
+      if (userData) {
+        router.push('/panel')
+      } else {
+        setErrors('Usuario y/o contraseña incorrectos.')
+        setIsSubmitting(false)
+      }
+    } catch (error) {
+      setErrors('Usuario y/o contraseña incorrectos.')
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -33,9 +52,10 @@ function Page () {
       <section className='flex flex-col w-8/12'>
         <LoginTitle />
         <form className="flex flex-col items-center justify-center gap-4" onSubmit={handleSubmit}>
+          {errors && <ErrorChip error={errors} />}
           <EmailInput handleChange={handleChange} email={formData.email} />
           <PasswordInput handleChange={handleChange} password={formData.password} />
-          <SendButton isSubmitting={isSubmitting}/>
+          <SendButton isSubmitting={isSubmitting} />
         </form>
         <RegisterLink />
       </section>
