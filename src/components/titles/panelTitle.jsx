@@ -1,11 +1,11 @@
-import { FaAddressBook } from 'react-icons/fa6'
+import { FaCube } from 'react-icons/fa6'
 
-function RegisterTitle () {
-  const title = 'Regístrate'
+function PanelTitle () {
+  const title = 'Panel'
   return (
     <div className="flex items-center justify-center w-full mb-4">
       <h2 className="text-success text-center text-xl p-3 flex flex-col items-center justify-center">
-      <FaAddressBook
+      <FaCube
         className="flex justify-center text-success items-center h-full mx-2"
         size={30}
       />
@@ -15,4 +15,4 @@ function RegisterTitle () {
   )
 }
 
-export default RegisterTitle
+export default PanelTitle
