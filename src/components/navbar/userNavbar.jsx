@@ -1,14 +1,23 @@
 'use client'
-import { Navbar, NavbarContent, NavbarMenuToggle } from '@nextui-org/react'
+import { Navbar, NavbarContent, NavbarMenuToggle, Skeleton } from '@nextui-org/react'
 import { useState } from 'react'
 import NavbarBrandLogo from './navbarBrandLogo'
 import UserNavbarMenu from './userNavbarMenu'
 import UserNavbarContent from './userNavbarContent'
 import UserAvatar from './userAvatar'
 
-function UserNavbar ({ profile, handleLogout }) {
+function UserNavbar ({ profile, handleLogout, loading }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeItem, setActiveItem] = useState('')
+  if (loading) {
+    return (
+      <Navbar onMenuOpenChange={setIsMenuOpen} className='w-screen fixed'>
+        <Skeleton className="w-full rounded-lg">
+          <div className="h-3 w-full rounded-lg bg-default-300"></div>
+        </Skeleton>
+      </Navbar>
+    )
+  }
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className='w-screen fixed'>
       <NavbarContent>
@@ -20,7 +29,7 @@ function UserNavbar ({ profile, handleLogout }) {
       </NavbarContent>
       <UserNavbarContent activeItem={activeItem} setActiveItem={setActiveItem} />
       <UserNavbarMenu activeItem={activeItem} setActiveItem={setActiveItem} />
-      <UserAvatar email={ profile.email } fullname={ profile.fullName } handleLogout={ handleLogout }/>
+      { profile && <UserAvatar email={ profile.email } fullname={ profile.fullName } handleLogout={ handleLogout }/> }
     </Navbar>
   )
 }

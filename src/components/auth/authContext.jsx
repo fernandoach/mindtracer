@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 // Crear el contexto
@@ -15,8 +15,8 @@ export const useAuth = () => useContext(AuthContext)
 
 // Proveedor de autenticación
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = React.useState(true)
+  const [profile, setProfile] = useState({ email: '', role: '', fullName: '' })
+  const [loading, setLoading] = useState(true)
 
   const router = useRouter()
 
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 
     if (loginResponse.ok) {
       const userData = await loginResponse.json()
-      setUser(userData) // Actualizar el estado del usuario en el contexto
+      setProfile(userData) // Actualizar el estado del usuario en el contexto
       return userData
     }
 
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
       })
 
       if (response.ok) {
-        setUser(null)
+        setProfile(null)
         router.push('/login')
       }
     } catch (error) {
@@ -56,36 +56,34 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch('/api/auth/profile', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-
-      if (!response.ok) {
-        throw new Error('Error fetching user data')
-      }
-
-      const data = await response.json()
-      setUser(data)
-      return data
-    } catch (err) {
-      return null
-    } finally {
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
-    // Cargar datos del usuario al montar el componente
-    fetchData()
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch('/api/auth/profile', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+
+        const data = await response.json()
+        setProfile(data)
+      } catch (error) {
+        console.error('Fetch error:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProfile()
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, handleLogout, loading, handleLogin }}>
+    <AuthContext.Provider value={{ profile, handleLogout, loading, handleLogin }}>
       {children}
     </AuthContext.Provider>
   )

@@ -35,7 +35,7 @@ export async function POST (request) {
       sameSite: 'lax',
       maxAge: 1000 * 60 * 60 * 24 * 30
     })
-    const response = Response.json({ message: 'Login exitoso.' })
+    const response = Response.json({ email: user.email, role: user.role, fullName: user.fullName })
     response.headers.append('Set-Cookie', serializedToken)
     return response
   } catch (error) {

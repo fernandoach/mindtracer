@@ -2,7 +2,6 @@ import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Link, Na
 import { FaAngleDown } from 'react-icons/fa6'
 
 function UserAvatar ({ email, fullname, handleLogout }) {
-  const name = fullname.length > 12 ? fullname.substring(0, 10) + ' ... ' : fullname
   return (
     <NavbarContent as="div" justify="end">
       <Dropdown placement="bottom-end">
@@ -17,7 +16,6 @@ function UserAvatar ({ email, fullname, handleLogout }) {
               size="sm"
               src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
             />
-            <span className='text-base text-success font-bold'>{ name }</span>
             <FaAngleDown size={20} className='text-success' />
           </div>
         </DropdownTrigger>

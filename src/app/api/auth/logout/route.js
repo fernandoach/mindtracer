@@ -15,7 +15,6 @@ export function POST (request) {
 
   try {
     cookies().delete('Auth-Cookie')
-
     return Response.json({ message: 'Éxito al cerrar sesión.' })
   } catch (error) {
     return Response.json(
