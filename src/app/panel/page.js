@@ -17,7 +17,6 @@ function Page () {
 
   const { handleLogout, profile, loading } = useAuth()
   const [idb, setIdb] = useState(null)
-  const [tat, setTat] = useState(null)
 
   useEffect(() => {
     const fetchTests = async () => {
@@ -35,20 +34,6 @@ function Page () {
 
         const dataIdb = await responseIdb.json()
         setIdb(dataIdb)
-
-        const responseTat = await fetch('/api/panel/tat_length', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-
-        if (!responseTat.ok) {
-          throw new Error(`HTTP error! Status: ${responseTat.status}`)
-        }
-
-        const dataTat = await responseTat.json()
-        setTat(dataTat)
       } catch (error) {}
     }
     fetchTests()
@@ -87,7 +72,7 @@ function Page () {
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center w-full gap-4 mb-16">
             <CardProgress progress={idb} title={titleIDB} href={hrefIDB} />
-            <CardProgress progress={tat} title={titleTAT} href={hrefTAT} />
+            <CardProgress progress={0} title={titleTAT} href={hrefTAT} />
           </div>
         </section>
         <Divider />

@@ -11,7 +11,7 @@ function CardProgress ({ progress, title, href }) {
             track: 'stroke-success/20',
             value: 'text-3xl font-semibold text-success'
           }}
-          value={progress}
+          value={progress * 100 / 21}
           strokeWidth={4}
           showValueLabel={true}
           aria-labelledby='Porcentaje de progreso'
