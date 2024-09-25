@@ -4,7 +4,7 @@ const registerSchema = joi.object({
   fullName: joi.string()
     .min(3)
     .max(100)
-    .pattern(/^[a-zA-Z\s]+$/)
+    .pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)
     .required()
     .messages({
       'string.empty': 'El nombre completo es obligatorio.',
