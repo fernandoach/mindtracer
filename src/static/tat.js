@@ -124,7 +124,7 @@ const tatQuestions = [
     }
   },
   {
-    b: {
+    bm: {
       theme: 'Tres manos agarran a un hombre vestido con un abrigo largo.',
       image: '/images/tat/18B.jpg'
     },

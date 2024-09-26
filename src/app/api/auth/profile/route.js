@@ -16,7 +16,7 @@ export async function POST (request) {
   const secretJwtKey = process.env.AUTH_SECRET
 
   try {
-    const { email, role, fullName } = jwt.verify(authCookie.value, String(secretJwtKey))
+    const { email, role, fullName, age, gender } = jwt.verify(authCookie.value, String(secretJwtKey))
 
     if (!email || !role || !fullName) throw new Error('Usted no esta autenticado.')
 
@@ -25,8 +25,7 @@ export async function POST (request) {
     const user = await UserModel.findOne({ email })
     await disconnectFromDb()
     if (!user) throw new Error('Usted no esta autenticado.')
-
-    return Response.json({ email, role, fullName })
+    return Response.json({ email, role, fullName, age, gender })
   } catch (error) {
     return Response.json(
       {

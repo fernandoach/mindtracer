@@ -23,7 +23,9 @@ export async function POST (request) {
         role: user.role,
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
         fullName: user.fullName,
-        email: user.email
+        email: user.email,
+        age: user.age,
+        gender: user.gender
       },
       String(secretJwtKey)
     )

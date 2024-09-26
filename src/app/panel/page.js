@@ -15,9 +15,10 @@ function Page () {
   const titleTAT = 'Test de apercepción temática'
   const hrefTAT = '/panel/tat'
 
-  const { handleLogout, profile, loading } = useAuth()
+  const { handleLogout, profile } = useAuth()
   const [idb, setIdb] = useState(null)
   const [tat, setTat] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchTests = async () => {
@@ -38,7 +39,7 @@ function Page () {
       } catch (error) {}
     }
     fetchTests()
-  }, [])
+  }, [profile])
 
   useEffect(() => {
     const fetchTests = async () => {
@@ -59,8 +60,8 @@ function Page () {
       } catch (error) {}
     }
     fetchTests()
-  }, [])
-  console.log(tat)
+    setLoading(false)
+  }, [idb])
   if (loading) {
     return (
       <main className="dark h-screen text-foreground bg-background flex flex-col items-center justify-center">

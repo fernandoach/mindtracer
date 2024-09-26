@@ -11,7 +11,7 @@ function CardProgress ({ progress, title, href }) {
             track: 'stroke-foreground/20',
             value: 'text-3xl font-semibold text-foreground'
           }}
-          value={progress * 100 / 21}
+          value={href === '/panel/tat' ? (progress * 100 / 20) : (progress * 100 / 21)}
           strokeWidth={4}
           showValueLabel={true}
           aria-labelledby='Porcentaje de progreso'
@@ -29,9 +29,13 @@ function CardProgress ({ progress, title, href }) {
           { title }
         </Chip>
         {
-          (progress * 100 / 21) < 100
-            ? <Button as={Link} variant='ghost' color='default' className='mt-4' href={href} aria-labelledby='Continuar'>Continuar</Button>
-            : <span aria-labelledby='Gracias por su participación' className='text-sm mt-4 text-foreground'>Gracias por su participación</span>
+          href === '/panel/tat'
+            ? (progress * 100 / 20) < 100
+                ? <Button as={Link} variant='ghost' color='default' className='mt-4' href={href} aria-labelledby='Continuar'>Continuar</Button>
+                : <span aria-labelledby='Gracias por su participación' className='text-sm mt-4 text-foreground'>Gracias por su participación</span>
+            : (progress * 100 / 21) < 100
+                ? <Button as={Link} variant='ghost' color='default' className='mt-4' href={href} aria-labelledby='Continuar'>Continuar</Button>
+                : <span aria-labelledby='Gracias por su participación' className='text-sm mt-4 text-foreground'>Gracias por su participación</span>
         }
       </CardFooter>
     </Card>
