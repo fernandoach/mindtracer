@@ -42,11 +42,14 @@ function Page () {
 
   useEffect(() => {
     if (tatLength !== null && tatQuestions[tatLength]) {
+      // TODO: conditions for the questions
       setQuestion(tatQuestions[tatLength].theme)
       setImageSrc(tatQuestions[tatLength].image)
     }
     setLoading(false)
   }, [tatLength])
+
+  // TODO: onSubmit
 
   return (
     <main className="dark text-foreground bg-background flex flex-col items-center justify-center overflow-x-hidden">
