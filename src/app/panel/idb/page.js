@@ -20,7 +20,6 @@ import BodySkeleton from '@/components/skeletons/bodySkeleton'
 import { useRouter } from 'next/navigation'
 
 function Page () {
-  const quest = 1
   const { handleLogout, profile } = useAuth()
   const [idbLength, setIdbLength] = useState(null)
   const [question, setQuestion] = useState('')
@@ -169,7 +168,7 @@ function Page () {
                 ))}
               </RadioGroup>
               <div className="flex flex-row items-center justify-center gap-4">
-                <Button isDisabled={quest < 1 || isSubmitted} color="warning" variant="ghost">
+                <Button isDisabled={idbLength < 1 || isSubmitted} color="warning" variant="ghost">
                   <FaCircleLeft className="text-xl pointer-events-none" />
                   <span>Atras</span>
                 </Button>
