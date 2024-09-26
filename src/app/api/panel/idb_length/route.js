@@ -27,7 +27,6 @@ export async function POST (request) {
   } catch (error) {
     return Response.json(
       {
-        statusCode: 401,
         message: error.message
       },
       { status: 401 }

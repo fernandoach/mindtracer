@@ -29,7 +29,7 @@ function CardProgress ({ progress, title, href }) {
           { title }
         </Chip>
         {
-          progress < 100
+          progress * 100 / 21 <= 100
             ? <Button as={Link} variant='ghost' color='success' className='mt-4' href={href} aria-labelledby='Continuar'>Continuar</Button>
             : <span aria-labelledby='Gracias por su participación' className='text-sm mt-4 text-success'>Gracias por su participación</span>
         }
