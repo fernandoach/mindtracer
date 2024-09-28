@@ -14,34 +14,28 @@ const initializeDb = async () => {
       await UserModel.init()
       await UserModel.createIndexes()
     }
-  } catch (error) {
-    throw new Error(error.message)
-  }
+  } catch (error) { }
 }
 
 const connectToDb = async () => {
   if (connection) {
-    throw new Error('Ya esta conectado a MongoDB.')
+    return
   }
   try {
     await initializeDb()
     await mongoose.connect(MONGO_URI)
     connection = true
-  } catch (error) {
-    throw new Error(error.message)
-  }
+  } catch (error) { }
 }
 
 const disconnectFromDb = async () => {
   if (!connection) {
-    throw new Error('No esta conectado a MongoDB.')
+    return
   }
   try {
     await mongoose.connection.close()
     connection = false
-  } catch (error) {
-    throw new Error(error.message)
-  }
+  } catch (error) { }
 }
 
 export { connectToDb, disconnectFromDb }

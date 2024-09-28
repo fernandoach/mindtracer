@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
 import { connectToDb, disconnectFromDb } from '@/db/connectToDb'
 import { UserModel } from '@/db/userModel'
+import mongoose from 'mongoose'
 
 export async function POST (request) {
   const authCookie = cookies().get('Auth-Cookie')
@@ -31,5 +32,9 @@ export async function POST (request) {
       },
       { status: 401 }
     )
+  } finally {
+    if (mongoose.connection.readyState === 1) {
+      await disconnectFromDb()
+    }
   }
 }
