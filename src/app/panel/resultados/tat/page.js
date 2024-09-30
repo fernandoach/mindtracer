@@ -4,19 +4,18 @@ import UserNavbar from '@/components/navbar/userNavbar'
 import FooterSection from '@/components/sections/footerSection'
 import BodySkeleton from '@/components/skeletons/bodySkeleton'
 import IdbTitle from '@/components/titles/idbTitle'
-import { Chip, Divider } from '@nextui-org/react'
+import { Divider } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { FaBriefcaseMedical } from 'react-icons/fa6'
 
-function Page () {
+function App () {
   const { handleLogout, profile } = useAuth()
   const [loading, setLoading] = useState(true)
-  const items = ['Tristeza', 'Pesimismo', 'Fracaso', 'Pérdida de placer', 'Sentimientos de culpa', 'Sentimientos de castigo', 'Disconformidad con uno mismo', 'Autocrítica', 'Pensamientos o Deseos Suicidas', 'Llanto', 'Agitación', 'Pérdida de interés', 'Indecisión', 'Desvalorización', 'Pérdida de Energía', 'Cambios en los Hábitos de Sueño', 'Irritabilidad', 'Cambios en el Apetito', 'Dificultad de Concentración', 'Cansancio o Fatiga', 'Pérdida de Interés en el Sexo']
-  const [idb, setIdb] = useState(null)
+  const [tat, setTat] = useState(null)
   useEffect(() => {
-    const fetchIdb = async () => {
+    const fetchTat = async () => {
       try {
-        const response = await fetch('/api/panel/get_idb', {
+        const response = await fetch('/api/panel/get_tat', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -28,28 +27,12 @@ function Page () {
         }
 
         const dataTat = await response.json()
-        setIdb(dataTat)
+        setTat(dataTat)
       } catch (error) {}
     }
-    fetchIdb()
+    fetchTat()
     setLoading(false)
   }, [])
-
-  let suma = 0
-  if (idb) {
-    idb.map((item) => {
-      suma += item
-      return null
-    })
-  }
-
-  const clasificacion = suma <= 12
-    ? 'Depresión minima'
-    : suma <= 19
-      ? 'Depresión leve'
-      : suma <= 28
-        ? 'Depresión moderada'
-        : 'Depresión grave'
 
   if (loading) {
     return (
@@ -74,25 +57,18 @@ function Page () {
         <IdbTitle />
         <div className='flex flex-col items-center justify-center gap-4'>
           {
-            idb && items.map((item, index) => {
+            tat && tat.map((item, index) => {
               return (
-                <div key={index} className="flex items-center justify-center gap-2">
-                  <FaBriefcaseMedical className="text-2xl font-bold text-success"/>
-                  <div className="text-sm">{item} : {idb[index]}</div>
+                <div key={index} className="flex flex-col items-center justify-center gap-2">
+                  <div className='flex items-center justify-center gap-2'>
+                    <FaBriefcaseMedical className="text-2xl font-bold text-success"/>
+                    <h4 className='text-xl text-success'>Lamina {index + 1}</h4>
+                  </div>
+                  <div className="text-sm">{item}</div>
                 </div>
               )
             })
           }
-        </div>
-        <div className='text-success text-center text-xl mt-6'>
-          <Chip
-            startContent={<FaBriefcaseMedical size={18} />}
-            variant="faded"
-            color="success"
-            className='p-4'
-          >
-            {clasificacion}
-          </Chip>
         </div>
       </section>
       <Divider />
@@ -101,4 +77,4 @@ function Page () {
   )
 }
 
-export default Page
+export default App
